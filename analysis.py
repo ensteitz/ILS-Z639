@@ -101,58 +101,14 @@ most_frequent_second_highest = max(second_highest_counts, key=second_highest_cou
 print(f"The most frequent category in 'Highest score' column is '{most_frequent_highest}' with {highest_counts[most_frequent_highest]} occurrences.")
 print(f"The most frequent category in 'Second highest' column is '{most_frequent_second_highest}' with {second_highest_counts[most_frequent_second_highest]} occurrences.")
 
+filtered_df = df[(df["Top Empath Category"].str.contains("discontent", case=False, na=False)) & 
+                 (df["Second Empath Category"].str.contains("happiness", case=False, na=False))]
 
+# Count the number of rows in the filtered DataFrame
+count_discontent_happiness = len(filtered_df)
 
-'''
-HERE to.....
-# Define the list of possible categories
-possible_categories = ["discontent", "happiness", "optimism", "social_media", "anticipation",
-                       "dispute", "irritability", "politics", "aggression", "sadness",
-                       "exasperation", "deception"]
-
-# Initialize dictionaries to count occurrences of each category in "Highest score" and "Second highest" columns
-highest_counts = {category: 0 for category in possible_categories}
-second_highest_counts = {category: 0 for category in possible_categories}
-
-# Iterate over the "Highest score" column and count occurrences of each category
-for value in df["Highest score"]:
-    for category in possible_categories:
-        if category in value:
-            highest_counts[category] += 1
-
-# Iterate over the "Second highest" column and count occurrences of each category
-for value in df["Second highest"]:
-    for category in possible_categories:
-        if category in value:
-            second_highest_counts[category] += 1
-
-# Find the most frequent category in "Highest score" column
-most_frequent_highest = max(highest_counts, key=highest_counts.get)
-
-# Find the most frequent category in "Second highest" column
-most_frequent_second_highest = max(second_highest_counts, key=second_highest_counts.get)
-
-
-
-
-this has problem --
-# Add new columns to the DataFrame for "Highest count" and "Second highest count"
-df["Highest count"] = [highest_counts[category] for category in df["Highest score"]]
-df["Second highest count"] = [second_highest_counts[category] for category in df["Second highest"]]
--- problm
-
-
-
-
-
-
-# Save the updated DataFrame to a new CSV file
-df.to_csv("df_emp_extralabels_clean_comments_updated.csv", index=False)
-print("Updated DataFrame saved to df_emp_clean_comments_updated.csv")
-
-'''
-
-
+# Print the count
+print(f"Number of rows where 'discontent' appears in 'Top Empath Category' and 'happiness' appears in 'Second Empath Category': {count_discontent_happiness}")
 
 
 # Print the most frequent categories and their counts

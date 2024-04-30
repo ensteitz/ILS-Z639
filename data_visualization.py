@@ -51,14 +51,20 @@ plt.savefig("pairplot_upvotes_created.png")  # Save the plot as PNG
 plt.close()
 
 # 4. Visualization: Scatter plot of upvotes vs time of day
+time_of_day_categories = ["Early Morning", "Morning", "Afternoon", "Evening", "Night"]
+
+# Group by "time_of_day" and calculate the mean of "Upvotes" for each category
+time_of_day_upvotes_mean = df.groupby("time_of_day")["upvotes"].mean().reindex(time_of_day_categories)
+
+# Create a bar graph
 plt.figure(figsize=(10, 6))
-sns.scatterplot(x="time_of_day", y="upvotes", data=df)
-plt.title("Upvotes vs Time of Day")
+sns.barplot(x=time_of_day_upvotes_mean.index, y=time_of_day_upvotes_mean.values, palette="viridis")
+plt.title("Mean Upvotes by Time of Day")
 plt.xlabel("Time of Day")
-plt.ylabel("Upvotes")
+plt.ylabel("Mean Upvotes")
 plt.xticks(rotation=45)
 plt.tight_layout()
-plt.savefig("upvotes_vs_time_of_day.png")  # Save the plot as PNG
+plt.savefig("mean_upvotes_by_time_of_day.png")  # Save the plot as PNG
 plt.close()
 
 
