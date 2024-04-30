@@ -32,9 +32,33 @@ df["Top Empath Category"] = df["Top Empath Reading"].apply(lambda x: extract_cat
 # Extract category names from "Second highest" column
 df["Second Empath Category"] = df["Second Empath Reading"].apply(lambda x: extract_category(str(x)))
 
-
 # Gives you the chart so you can see what it looks like now
 print(df.head())
+
+
+
+
+# Initialize dictionaries to store counts of each category in "Top Empath Category" and "Second Empath Category"
+top_category_counts = {category: 0 for category in possible_categories}
+second_category_counts = {category: 0 for category in possible_categories}
+
+# Iterate over the "Top Empath Category" column and count occurrences of each category
+for category in df["Top Empath Category"]:
+    if category in possible_categories:
+        top_category_counts[category] += 1
+
+# Iterate over the "Second Empath Category" column and count occurrences of each category
+for category in df["Second Empath Category"]:
+    if category in possible_categories:
+        second_category_counts[category] += 1
+
+# Print the counts of each category in "Top Empath Category" and "Second Empath Category"
+print("Counts of categories in 'Top Empath Category':")
+print(top_category_counts)
+print("\nCounts of categories in 'Second Empath Category':")
+print(second_category_counts)
+
+
 
 # When was the first and last comment posted
 print("The first comment was posted on:")

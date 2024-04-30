@@ -22,6 +22,17 @@ plt.tight_layout()
 plt.savefig("empath_category_by_commentnum.png")  # Save the plot as PNG
 plt.close()
 
+# 1.5 Visualization: Bar chart of highest scores by category
+plt.figure(figsize=(10, 6))
+sns.countplot(x="Second Empath Category", data=df, order=df["Second Empath Category"].value_counts().index)
+plt.xticks(rotation=45, ha='right')
+plt.title("Number of Comments by Highest Score Category")
+plt.xlabel("Second Empath Category")
+plt.ylabel("Number of Comments")
+plt.tight_layout()
+plt.savefig("empath_category_by_commentnum_second.png")  # Save the plot as PNG
+plt.close()
+
 # 2. Visualization: Histogram of upvotes
 plt.figure(figsize=(8, 5))
 sns.histplot(df["upvotes"], bins=20, kde=True)
@@ -65,4 +76,5 @@ plt.ylabel("Mean Upvotes")
 plt.title("Mean Upvotes by Top Empath Category")
 plt.xticks(rotation=45, ha='right')  # Rotate x-axis labels for better readability
 plt.tight_layout()  # Adjust layout to prevent overlapping labels
+plt.savefig("upvotes_for_top_empath_category.png")
 plt.show()
